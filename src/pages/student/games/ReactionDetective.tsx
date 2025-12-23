@@ -281,86 +281,178 @@ export default function ReactionDetective() {
           </button>
         </div>
 
-        <div className="flex-1 p-6 overflow-auto flex flex-col">
-          {/* Lab Setup */}
-          <div className="mb-6 space-y-4">
+        <div className="flex-1 p-6 overflow-auto flex flex-col gap-6">
+          {/* Reaction Chamber */}
+          <div className="space-y-4">
             <p className="text-sm font-semibold text-muted-foreground text-center">Mix these substances and observe what happens</p>
 
-            {/* Substances */}
-            <div className="flex items-center justify-center gap-4">
-              {/* Substance 1 */}
-              <div className="flex flex-col items-center">
-                <div className="text-5xl mb-2">{currentReaction.emoji1}</div>
-                <p className="text-sm font-semibold">{currentReaction.substance1}</p>
-              </div>
-
-              {/* Plus Sign */}
-              <div className="text-3xl text-muted-foreground">+</div>
-
-              {/* Substance 2 */}
-              <div className="flex flex-col items-center">
-                <div className="text-5xl mb-2">{currentReaction.emoji2}</div>
-                <p className="text-sm font-semibold">{currentReaction.substance2}</p>
-              </div>
-            </div>
-
-            {/* Mix Button */}
-            <button
-              onClick={handleMix}
-              disabled={gameState.hasReacted}
-              className={`w-full py-3 rounded-lg font-semibold transition-all ${
-                gameState.hasReacted
-                  ? "opacity-50 cursor-not-allowed"
-                  : "bg-gradient-to-r from-secondary to-secondary/80 hover:from-secondary/90 hover:to-secondary/70 text-secondary-foreground hover:scale-105 active:scale-95"
-              }`}
-            >
-              🧪 Mix Substances
-            </button>
-          </div>
-
-          {/* Reaction Effects */}
-          {gameState.hasReacted && (
-            <div className="mb-6 space-y-4 animate-pulse">
-              <div className="bg-gradient-to-r from-secondary/20 to-secondary/10 rounded-xl p-6 border-2 border-secondary/40">
-                <p className="text-center font-bold text-lg mb-4">Reaction happening! What do you observe? 👀</p>
-
-                <div className="grid grid-cols-2 gap-3">
-                  {currentReaction.effectEmojis.map((emoji, index) => (
-                    <div key={index} className="text-3xl text-center animate-bounce" style={{ animationDelay: `${index * 0.1}s` }}>
-                      {emoji}
+            {/* Reaction Container */}
+            <div className="relative bg-gradient-to-br from-gray-100 to-gray-50 dark:from-slate-800 dark:to-slate-900 rounded-2xl border-2 border-border p-8 min-h-64 flex flex-col items-center justify-center overflow-hidden">
+              {!gameState.isReacting && !gameState.hasReacted && (
+                <>
+                  {/* Pre-reaction substances */}
+                  <div className="flex items-center justify-center gap-6 w-full">
+                    {/* Substance 1 */}
+                    <div className="flex flex-col items-center">
+                      <div className="text-6xl mb-3 transition-transform hover:scale-110">{currentReaction.emoji1}</div>
+                      <p className="text-sm font-semibold text-center">{currentReaction.substance1}</p>
                     </div>
-                  ))}
-                </div>
-              </div>
 
-              {gameState.feedback && (
-                <div className="p-4 text-center rounded-lg bg-muted/50">
-                  <p className="font-semibold text-secondary">{gameState.feedback}</p>
-                </div>
+                    {/* Plus Sign */}
+                    <div className="text-3xl text-muted-foreground">+</div>
+
+                    {/* Substance 2 */}
+                    <div className="flex flex-col items-center">
+                      <div className="text-6xl mb-3 transition-transform hover:scale-110">{currentReaction.emoji2}</div>
+                      <p className="text-sm font-semibold text-center">{currentReaction.substance2}</p>
+                    </div>
+                  </div>
+
+                  {/* Mix Button */}
+                  <button
+                    onClick={handleMix}
+                    className="mt-6 px-6 py-3 bg-gradient-to-r from-secondary to-secondary/80 hover:from-secondary/90 hover:to-secondary/70 text-secondary-foreground font-bold rounded-lg transition-all hover:scale-105 active:scale-95 text-lg"
+                  >
+                    🧪 Mix Substances
+                  </button>
+                </>
               )}
 
-              {/* Effect Tags */}
-              <div className="space-y-2">
-                <p className="text-sm font-semibold text-muted-foreground">Tag the observable changes:</p>
-                <div className="grid grid-cols-2 gap-2">
-                  {EFFECT_OPTIONS.map((option) => (
-                    <button
-                      key={option.id}
-                      onClick={() => handleEffectTag(option.id)}
-                      disabled={!gameState.hasReacted}
-                      className={`p-3 rounded-lg transition-all flex flex-col items-center gap-2 ${
-                        gameState.selectedEffects.includes(option.id)
-                          ? "bg-secondary/30 border-2 border-secondary ring-2 ring-secondary/30 scale-105"
-                          : currentReaction.correctTags.includes(option.id)
-                            ? "bg-muted/50 border-2 border-border hover:border-secondary/50 cursor-pointer"
-                            : "bg-muted/30 border-2 border-border/30 cursor-default opacity-60"
-                      }`}
-                    >
-                      <span className="text-2xl">{option.emoji}</span>
-                      <span className="text-xs font-semibold">{option.label}</span>
-                    </button>
-                  ))}
+              {(gameState.isReacting || gameState.hasReacted) && (
+                <div className="w-full h-full flex flex-col items-center justify-center gap-4 relative">
+                  {/* Reaction Result with Dynamic Color */}
+                  <div className={`bg-gradient-to-br ${currentReaction.reactionColor} rounded-2xl w-32 h-32 flex items-center justify-center text-5xl shadow-lg ${gameState.isReacting ? 'animate-pulse' : ''}`}>
+                    {currentReaction.effectEmojis[0]}
+                  </div>
+
+                  {/* Animated Visual Effects */}
+                  {gameState.isReacting && (
+                    <>
+                      {/* Bubbles */}
+                      {currentReaction.visualEffects.includes("bubbles") && (
+                        <>
+                          {[...Array(6)].map((_, i) => (
+                            <div
+                              key={`bubble-${i}`}
+                              className="bubble absolute text-2xl pointer-events-none"
+                              style={{
+                                left: `${30 + i * 10}%`,
+                                bottom: '20%',
+                                '--tx': `${Math.random() * 40 - 20}px`,
+                                animationDelay: `${i * 0.15}s`,
+                              } as React.CSSProperties}
+                            >
+                              💨
+                            </div>
+                          ))}
+                        </>
+                      )}
+
+                      {/* Heat Waves */}
+                      {currentReaction.visualEffects.includes("heat") && (
+                        <>
+                          {[...Array(4)].map((_, i) => (
+                            <div
+                              key={`heat-${i}`}
+                              className="heat-wave absolute text-3xl pointer-events-none"
+                              style={{
+                                left: `${35 + i * 10}%`,
+                                bottom: '25%',
+                                animationDelay: `${i * 0.2}s`,
+                              }}
+                            >
+                              🔥
+                            </div>
+                          ))}
+                        </>
+                      )}
+
+                      {/* Light Flashes */}
+                      {currentReaction.visualEffects.includes("light") && (
+                        <>
+                          {[...Array(3)].map((_, i) => (
+                            <div
+                              key={`light-${i}`}
+                              className="light-effect absolute text-4xl pointer-events-none"
+                              style={{
+                                left: `${35 + i * 15}%`,
+                                bottom: '20%',
+                                animationDelay: `${i * 0.25}s`,
+                              }}
+                            >
+                              💡
+                            </div>
+                          ))}
+                        </>
+                      )}
+
+                      {/* Smoke/Growth */}
+                      {currentReaction.visualEffects.includes("growth") && (
+                        <>
+                          {[...Array(5)].map((_, i) => (
+                            <div
+                              key={`smoke-${i}`}
+                              className="smoke-particle absolute text-2xl pointer-events-none"
+                              style={{
+                                left: `${30 + i * 8}%`,
+                                bottom: '15%',
+                                animationDelay: `${i * 0.1}s`,
+                              }}
+                            >
+                              ☁️
+                            </div>
+                          ))}
+                        </>
+                      )}
+
+                      {/* Color Change Label */}
+                      {currentReaction.visualEffects.includes("color_change") && (
+                        <div className="absolute top-6 left-6 bg-gradient-to-r from-blue-400 to-purple-400 text-white px-3 py-1 rounded-full text-xs font-bold animate-bounce">
+                          🎨 Color Changing
+                        </div>
+                      )}
+                    </>
+                  )}
+
+                  {gameState.hasReacted && !gameState.isReacting && (
+                    <div className="text-center space-y-3">
+                      <p className="text-lg font-bold text-foreground">Reaction Complete!</p>
+                      <p className="text-sm text-muted-foreground">What did you observe?</p>
+                    </div>
+                  )}
                 </div>
+              )}
+            </div>
+          </div>
+
+          {gameState.feedback && (
+            <div className="p-4 text-center rounded-lg bg-green-500/10 border-2 border-green-500/50">
+              <p className="font-semibold text-green-600">{gameState.feedback}</p>
+            </div>
+          )}
+
+          {/* Observation Panel */}
+          {gameState.showObservationPanel && (
+            <div className="observation-panel space-y-3">
+              <p className="text-sm font-bold text-foreground text-center">What did you observe? Select all that apply:</p>
+              <div className="grid grid-cols-2 gap-2">
+                {EFFECT_OPTIONS.map((option) => (
+                  <button
+                    key={option.id}
+                    onClick={() => handleEffectTag(option.id)}
+                    disabled={!gameState.showObservationPanel}
+                    className={`p-3 rounded-lg transition-all flex flex-col items-center gap-2 font-medium ${
+                      gameState.selectedEffects.includes(option.id)
+                        ? "bg-green-500/30 border-2 border-green-500 ring-2 ring-green-500/30 scale-105"
+                        : currentReaction.correctTags.includes(option.id)
+                          ? "bg-muted/50 border-2 border-border hover:border-green-500/50 cursor-pointer hover:scale-105"
+                          : "bg-muted/30 border-2 border-border/30 cursor-default opacity-50"
+                    }`}
+                  >
+                    <span className="text-2xl">{option.emoji}</span>
+                    <span className="text-xs font-semibold text-center">{option.label}</span>
+                  </button>
+                ))}
               </div>
             </div>
           )}
