@@ -129,8 +129,17 @@ export default function ReactionDetective() {
 
     setGameState((prev) => ({
       ...prev,
-      hasReacted: true,
+      isReacting: true,
     }));
+
+    setTimeout(() => {
+      setGameState((prev) => ({
+        ...prev,
+        hasReacted: true,
+        isReacting: false,
+        showObservationPanel: true,
+      }));
+    }, 2500);
   };
 
   const handleEffectTag = (effectId: string) => {
