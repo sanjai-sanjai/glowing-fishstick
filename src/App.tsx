@@ -47,12 +47,12 @@ const TechnologyPage = lazy(() => import("./pages/student/TechnologyPage"));
 const FinancePage = lazy(() => import("./pages/student/FinancePage"));
 const EntrepreneurshipPage = lazy(() => import("./pages/student/EntrepreneurshipPage"));
 const VillageSkillsPage = lazy(() => import("./pages/student/VillageSkillsPage"));
-const VillagePowerEngineer = lazy(() => import("./pages/student/games/VillagePowerEngineer"));
-const TrajectoryLock = lazy(() => import("./pages/student/games/TrajectoryLock"));
-const VoltageTrap = lazy(() => import("./pages/student/games/VoltageTrap"));
-const ForceBalance = lazy(() => import("./pages/student/games/ForceBalance"));
-const WaveRider = lazy(() => import("./pages/student/games/WaveRider"));
-const GravityDrop = lazy(() => import("./pages/student/games/GravityDrop"));
+const ProjectileMotion = lazy(() => import("./pages/student/games/ProjectileMotion"));
+const VillagePhysicsExplorer = lazy(() => import("./pages/student/games/VillagePhysicsExplorer"));
+const ForceBuilder = lazy(() => import("./pages/student/games/ForceBuilder"));
+const EnergyQuest = lazy(() => import("./pages/student/games/EnergyQuest"));
+const VillageLightUp = lazy(() => import("./pages/student/games/VillageLightUp"));
+const LogicBlocksPuzzle = lazy(() => import("./pages/student/games/LogicBlocksPuzzle"));
 const PropertyPuzzle = lazy(() => import("./pages/student/games/PropertyPuzzle"));
 const MoleculeBuilder = lazy(() => import("./pages/student/games/MoleculeBuilder"));
 const PeriodicTablePuzzle = lazy(() => import("./pages/student/games/PeriodicTablePuzzle"));
@@ -128,34 +128,34 @@ const App = () => (
                     <PhysicsPage />
                   </ProtectedRoute>
                 } />
-                <Route path="/student/physics/village-power-engineer" element={
+                <Route path="/student/physics/projectile-motion" element={
                   <ProtectedRoute allowedRoles={["student"]}>
-                    <VillagePowerEngineer />
+                    <ProjectileMotion />
                   </ProtectedRoute>
                 } />
-                <Route path="/student/physics/trajectory-lock" element={
+                <Route path="/student/physics/village-physics-explorer" element={
                   <ProtectedRoute allowedRoles={["student"]}>
-                    <TrajectoryLock />
+                    <VillagePhysicsExplorer />
                   </ProtectedRoute>
                 } />
-                <Route path="/student/physics/voltage-trap" element={
+                <Route path="/student/physics/force-builder" element={
                   <ProtectedRoute allowedRoles={["student"]}>
-                    <VoltageTrap />
+                    <ForceBuilder />
                   </ProtectedRoute>
                 } />
-                <Route path="/student/physics/force-balance" element={
+                <Route path="/student/physics/energy-quest" element={
                   <ProtectedRoute allowedRoles={["student"]}>
-                    <ForceBalance />
+                    <EnergyQuest />
                   </ProtectedRoute>
                 } />
-                <Route path="/student/physics/wave-rider" element={
+                <Route path="/student/physics/village-light-up" element={
                   <ProtectedRoute allowedRoles={["student"]}>
-                    <WaveRider />
+                    <VillageLightUp />
                   </ProtectedRoute>
                 } />
-                <Route path="/student/physics/gravity-drop" element={
+                <Route path="/student/physics/logic-blocks-puzzle" element={
                   <ProtectedRoute allowedRoles={["student"]}>
-                    <GravityDrop />
+                    <LogicBlocksPuzzle />
                   </ProtectedRoute>
                 } />
                 <Route path="/student/chemistry" element={

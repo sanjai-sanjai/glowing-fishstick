@@ -1,53 +1,62 @@
 import { SubjectLayout } from "@/components/student/SubjectLayout";
 import { GameMissionCard } from "@/components/student/GameMissionCard";
-import { Atom, Target, Zap, Wind, Waves, Feather } from "lucide-react";
+import { Atom, Target, Zap, Wind, Zap as Lightning, Lightbulb, Brain } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const physicsMissions = [
   {
-    title: "Trajectory Lock",
-    description: "Launch the ball and nail the perfect landing using angle and speed",
+    title: "Projectile Motion",
+    description: "Launch a cannon at the perfect angle and speed to hit the target",
     icon: Target,
     reward: 150,
     difficulty: "medium" as const,
     status: "available" as const,
-    path: "/student/physics/trajectory-lock",
+    path: "/student/physics/projectile-motion",
   },
   {
-    title: "Voltage Trap",
-    description: "Power the circuit without blowing the fuse using voltage control",
-    icon: Zap,
-    reward: 120,
-    difficulty: "medium" as const,
-    status: "available" as const,
-    path: "/student/physics/voltage-trap",
-  },
-  {
-    title: "Force Balance",
-    description: "Push the box and stop it exactly on target—inertia rules here",
+    title: "Village Physics Explorer",
+    description: "Push carts on different surfaces and feel how friction changes motion",
     icon: Wind,
-    reward: 100,
+    reward: 120,
     difficulty: "easy" as const,
     status: "available" as const,
-    path: "/student/physics/force-balance",
+    path: "/student/physics/village-physics-explorer",
   },
   {
-    title: "Wave Rider",
-    description: "Shape the wave to match all gates using frequency and amplitude",
-    icon: Waves,
-    reward: 140,
-    difficulty: "hard" as const,
-    status: "available" as const,
-    path: "/student/physics/wave-rider",
-  },
-  {
-    title: "Gravity Drop",
-    description: "Drop at the right time to hit the moving target—timing is everything",
-    icon: Feather,
-    reward: 110,
+    title: "Force Builder",
+    description: "Apply force to objects of different mass and watch acceleration change",
+    icon: Zap,
+    reward: 100,
     difficulty: "medium" as const,
     status: "available" as const,
-    path: "/student/physics/gravity-drop",
+    path: "/student/physics/force-builder",
+  },
+  {
+    title: "Energy Quest",
+    description: "Control water flow to power turbines and light up the village",
+    icon: Lightning,
+    reward: 140,
+    difficulty: "medium" as const,
+    status: "available" as const,
+    path: "/student/physics/energy-quest",
+  },
+  {
+    title: "Village Light-Up",
+    description: "Rotate wire tiles to complete circuits and power the lights",
+    icon: Lightbulb,
+    reward: 110,
+    difficulty: "hard" as const,
+    status: "available" as const,
+    path: "/student/physics/village-light-up",
+  },
+  {
+    title: "Logic Blocks Puzzle",
+    description: "Connect logic gates to control signals and solve the puzzle",
+    icon: Brain,
+    reward: 130,
+    difficulty: "hard" as const,
+    status: "available" as const,
+    path: "/student/physics/logic-blocks-puzzle",
   },
 ];
 
