@@ -15,6 +15,8 @@ interface Reaction {
   effects: string[];
   effectEmojis: string[];
   correctTags: string[];
+  reactionColor: string;
+  visualEffects: string[];
 }
 
 const REACTIONS: Reaction[] = [
@@ -22,12 +24,14 @@ const REACTIONS: Reaction[] = [
     id: "iron-acid",
     substance1: "Iron",
     substance2: "Acid",
-    result: "Iron melts",
+    result: "Iron reacts",
     emoji1: "⬛",
     emoji2: "🟡",
     effects: ["Bubbling", "Heat"],
     effectEmojis: ["💨", "🔥"],
     correctTags: ["gas", "heat"],
+    reactionColor: "from-gray-400 to-orange-400",
+    visualEffects: ["bubbles", "heat"],
   },
   {
     id: "milk-vinegar",
@@ -39,6 +43,8 @@ const REACTIONS: Reaction[] = [
     effects: ["Color change", "Bubbling"],
     effectEmojis: ["🎨", "💨"],
     correctTags: ["color_change", "gas"],
+    reactionColor: "from-white to-yellow-100",
+    visualEffects: ["color_change", "bubbles"],
   },
   {
     id: "water-copper",
@@ -50,6 +56,8 @@ const REACTIONS: Reaction[] = [
     effects: ["Color change"],
     effectEmojis: ["🎨"],
     correctTags: ["color_change"],
+    reactionColor: "from-blue-200 to-blue-500",
+    visualEffects: ["color_change"],
   },
   {
     id: "bread-yeast",
@@ -61,6 +69,8 @@ const REACTIONS: Reaction[] = [
     effects: ["Bubbling", "Growth"],
     effectEmojis: ["💨", "📈"],
     correctTags: ["gas", "physical_change"],
+    reactionColor: "from-yellow-100 to-orange-200",
+    visualEffects: ["bubbles", "growth"],
   },
   {
     id: "burning-candle",
@@ -72,6 +82,8 @@ const REACTIONS: Reaction[] = [
     effects: ["Heat", "Light"],
     effectEmojis: ["🔥", "💡"],
     correctTags: ["heat", "light"],
+    reactionColor: "from-yellow-300 to-red-400",
+    visualEffects: ["heat", "light"],
   },
 ];
 
