@@ -8,16 +8,26 @@ import {
   ProbabilityRun,
   PatternMaster,
   VillageBudgetPlanner,
+  MathHeist,
+  GroceryMarket,
+  DailyMathSpin,
+  PatternMasterGame,
+  FarmYieldCalculator,
 } from "@/components/games";
-import { 
-  Calculator, 
-  Scale, 
-  PieChart, 
-  Lock, 
-  Square, 
-  Zap, 
-  Puzzle, 
-  PiggyBank 
+import {
+  Calculator,
+  Scale,
+  PieChart,
+  Lock,
+  Square,
+  Zap,
+  Puzzle,
+  PiggyBank,
+  Vault,
+  ShoppingCart,
+  Loader,
+  BarChart3,
+  Sprout,
 } from "lucide-react";
 import { useState } from "react";
 
@@ -85,6 +95,51 @@ const mathGames = [
     status: "available" as const,
     gameId: "budget",
   },
+  {
+    title: "Math Heist",
+    description: "Reach the exact target number using addition and subtraction cards",
+    icon: Vault,
+    reward: 150,
+    difficulty: "easy" as const,
+    status: "available" as const,
+    gameId: "heist",
+  },
+  {
+    title: "Grocery Market",
+    description: "Weigh items and pay exact amounts using decimals and money",
+    icon: ShoppingCart,
+    reward: 160,
+    difficulty: "medium" as const,
+    status: "available" as const,
+    gameId: "grocery",
+  },
+  {
+    title: "Daily Math Spin",
+    description: "Solve fast-paced spinning math problems and build your streak",
+    icon: Loader,
+    reward: 140,
+    difficulty: "medium" as const,
+    status: "available" as const,
+    gameId: "spin",
+  },
+  {
+    title: "Pattern Master Quest",
+    description: "Complete number sequences by identifying the hidden pattern",
+    icon: BarChart3,
+    reward: 155,
+    difficulty: "hard" as const,
+    status: "available" as const,
+    gameId: "pattern-quest",
+  },
+  {
+    title: "Farm Yield Calculator",
+    description: "Balance field size, seeds, and water to maximize crop yield",
+    icon: Sprout,
+    reward: 170,
+    difficulty: "hard" as const,
+    status: "available" as const,
+    gameId: "farm",
+  },
 ];
 
 export default function MathematicsPage() {
@@ -144,6 +199,11 @@ export default function MathematicsPage() {
       {activeGame === "probability" && <ProbabilityRun onClose={handleGameClose} />}
       {activeGame === "pattern-master" && <PatternMaster onClose={handleGameClose} />}
       {activeGame === "budget" && <VillageBudgetPlanner onClose={handleGameClose} />}
+      {activeGame === "heist" && <MathHeist onClose={handleGameClose} />}
+      {activeGame === "grocery" && <GroceryMarket onClose={handleGameClose} />}
+      {activeGame === "spin" && <DailyMathSpin onClose={handleGameClose} />}
+      {activeGame === "pattern-quest" && <PatternMasterGame onClose={handleGameClose} />}
+      {activeGame === "farm" && <FarmYieldCalculator onClose={handleGameClose} />}
     </>
   );
 }

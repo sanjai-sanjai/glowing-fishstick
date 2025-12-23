@@ -1,83 +1,149 @@
 import { SubjectLayout } from "@/components/student/SubjectLayout";
 import { GameMissionCard } from "@/components/student/GameMissionCard";
-import { Laptop, Code, Shield, Wifi, Smartphone, Globe } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import {
+  VillageLightUp,
+  AppBuilderStudio,
+  DebugDungeon,
+  SystemBuilder,
+  CircuitBuilder,
+  InputOutputLab,
+  NetworkBuilder,
+} from "@/components/games";
+import {
+  Laptop,
+  Zap,
+  Code,
+  Bug,
+  Cog,
+  Lightbulb,
+  RefreshCw,
+  Wifi,
+} from "lucide-react";
+import { useState } from "react";
 
-const techMissions = [
+const techGames = [
   {
-    title: "Digital Literacy Basics",
-    description: "Learn to use computers and smartphones effectively",
-    icon: Smartphone,
-    reward: 80,
+    title: "Village Light-Up",
+    description: "Build electrical circuits to light up the festival",
+    icon: Zap,
+    reward: 150,
     difficulty: "easy" as const,
-    status: "completed" as const,
+    status: "available" as const,
+    gameId: "lightup",
   },
   {
-    title: "Coding Playground",
-    description: "Start your coding journey with fun visual programming",
+    title: "App Builder Studio",
+    description: "Create working apps by connecting UI and logic",
     icon: Code,
-    reward: 100,
-    difficulty: "medium" as const,
-    status: "in-progress" as const,
-    progress: 40,
-    path: "/student/technology/skills",
+    reward: 160,
+    difficulty: "easy" as const,
+    status: "available" as const,
+    gameId: "appbuilder",
   },
   {
-    title: "Internet Safety",
-    description: "Stay safe online and protect your personal information",
-    icon: Shield,
-    reward: 90,
+    title: "Debug Dungeon",
+    description: "Find and fix logical errors in code",
+    icon: Bug,
+    reward: 155,
     difficulty: "medium" as const,
     status: "available" as const,
+    gameId: "debug",
   },
   {
-    title: "How Internet Works",
-    description: "Understand networks, WiFi, and how data travels",
-    icon: Wifi,
-    reward: 85,
+    title: "System Builder",
+    description: "Arrange steps in the correct order for systems to work",
+    icon: Cog,
+    reward: 165,
     difficulty: "medium" as const,
     status: "available" as const,
+    gameId: "system",
   },
   {
-    title: "Web Explorer",
-    description: "Create your first webpage and learn HTML basics",
-    icon: Globe,
-    reward: 120,
+    title: "Circuit Builder",
+    description: "Assemble electronic circuits and test them",
+    icon: Lightbulb,
+    reward: 170,
+    difficulty: "medium" as const,
+    status: "available" as const,
+    gameId: "circuit",
+  },
+  {
+    title: "Input Output Lab",
+    description: "Understand how systems process inputs and outputs",
+    icon: RefreshCw,
+    reward: 175,
     difficulty: "hard" as const,
-    status: "locked" as const,
+    status: "available" as const,
+    gameId: "iolab",
+  },
+  {
+    title: "Network Builder",
+    description: "Connect devices and build communication networks",
+    icon: Wifi,
+    reward: 180,
+    difficulty: "hard" as const,
+    status: "available" as const,
+    gameId: "network",
   },
 ];
 
 export default function TechnologyPage() {
-  const navigate = useNavigate();
+  const [activeGame, setActiveGame] = useState<string | null>(null);
+
+  const handleGameSelect = (gameId: string) => {
+    setActiveGame(gameId);
+  };
+
+  const handleGameClose = () => {
+    setActiveGame(null);
+  };
 
   return (
-    <SubjectLayout
-      title="Technology"
-      icon={Laptop}
-      iconColor="text-primary"
-      progress={20}
-      totalLessons={8}
-      completedLessons={2}
-      xpEarned={120}
-    >
-      <div className="slide-up" style={{ animationDelay: "150ms" }}>
-        <h3 className="mb-4 font-heading font-semibold">Missions & Games</h3>
-        <div className="space-y-3">
-          {techMissions.map((mission, index) => (
-            <div
-              key={mission.title}
-              className="slide-up"
-              style={{ animationDelay: `${200 + index * 50}ms` }}
-            >
-              <GameMissionCard
-                {...mission}
-                onClick={() => mission.path && navigate(mission.path)}
-              />
-            </div>
-          ))}
+    <>
+      <SubjectLayout
+        title="Technology"
+        icon={Laptop}
+        iconColor="text-primary"
+        progress={0}
+        totalLessons={7}
+        completedLessons={0}
+        xpEarned={0}
+      >
+        <div className="slide-up" style={{ animationDelay: "150ms" }}>
+          <h3 className="mb-4 font-heading font-semibold">Gamified Learning Missions</h3>
+          <p className="text-sm text-muted-foreground mb-4">
+            Master technology concepts through interactive games. Each game teaches one key concept through hands-on learning.
+          </p>
+          <div className="space-y-3">
+            {techGames.map((game, index) => (
+              <div
+                key={game.gameId}
+                className="slide-up"
+                style={{ animationDelay: `${200 + index * 50}ms` }}
+              >
+                <GameMissionCard
+                  title={game.title}
+                  description={game.description}
+                  icon={game.icon}
+                  reward={game.reward}
+                  difficulty={game.difficulty}
+                  status={game.status}
+                  onClick={() => handleGameSelect(game.gameId)}
+                />
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-    </SubjectLayout>
+      </SubjectLayout>
+
+      {/* Game Components */}
+      {activeGame === "lightup" && <VillageLightUp onClose={handleGameClose} />}
+      {activeGame === "appbuilder" && <AppBuilderStudio onClose={handleGameClose} />}
+      {activeGame === "debug" && <DebugDungeon onClose={handleGameClose} />}
+      {activeGame === "system" && <SystemBuilder onClose={handleGameClose} />}
+      {activeGame === "circuit" && <CircuitBuilder onClose={handleGameClose} />}
+      {activeGame === "iolab" && <InputOutputLab onClose={handleGameClose} />}
+      {activeGame === "network" && <NetworkBuilder onClose={handleGameClose} />}
+    </>
   );
 }
