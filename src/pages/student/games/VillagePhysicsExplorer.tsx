@@ -400,7 +400,7 @@ export default function VillagePhysicsExplorer() {
 
       {/* Embedded Info */}
       {!isFullscreen && (
-        <div className="mt-6 w-full max-w-4xl bg-green-50 p-6 rounded-lg border border-green-200">
+        <div className="mt-6 w-full max-w-4xl bg-card p-6 rounded-lg border border-border/50">
           <div className="space-y-4">
             <div>
               <h3 className="font-bold text-gray-800 mb-2">📘 Concept</h3>
