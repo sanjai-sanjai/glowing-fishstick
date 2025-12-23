@@ -493,7 +493,7 @@ export default function EnergyQuest() {
           <div className="space-y-6">
             {/* Flow Control */}
             <div className="space-y-3">
-              <label className="text-sm font-semibold text-gray-800">
+              <label className="text-sm font-semibold text-black">
                 Control Water Flow
               </label>
               <div className="flex gap-3 items-center">
