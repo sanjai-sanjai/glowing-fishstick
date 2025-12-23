@@ -341,7 +341,7 @@ export default function VillagePhysicsExplorer() {
 
             {/* Result Display */}
             {showResult && (
-              <div className="p-4 rounded-lg bg-gradient-to-r from-purple-100 to-pink-100 border border-purple-300">
+              <div className="p-4 rounded-lg bg-muted border border-border/50">
                 <div className="text-center mb-4">
                   <div className="text-3xl font-bold text-purple-700 mb-2">
                     {lastDistance}px
